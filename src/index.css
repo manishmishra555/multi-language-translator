@@ -23,12 +23,37 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  
+  /* Light mode (default) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f3f4f6;
+  --text-primary: #1a202c;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+}
+
+html.dark {
+  /* Dark mode */
+  --bg-primary: #1a202c;
+  --bg-secondary: #111827;
+  --text-primary: #e2e8f0;
+  --text-secondary: #9ca3af;
+  --border-color: #374151;
+  
+  color-scheme: dark;
+}
+
+html.light {
+  color-scheme: light;
 }
 
 body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 /* Custom utility classes */
@@ -38,6 +63,10 @@ body {
 
 .btn-primary:focus {
   @apply outline-none ring-2 ring-primary-500 ring-offset-2;
+}
+
+html.dark .btn-primary:focus {
+  @apply ring-offset-gray-900;
 }
 
 .btn-primary:disabled {
@@ -52,32 +81,40 @@ body {
   @apply outline-none ring-2 ring-gray-400 ring-offset-2;
 }
 
+html.dark .btn-secondary:focus {
+  @apply ring-offset-gray-900;
+}
+
 .input-field {
-  @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg outline-none transition-all duration-200;
+  @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg outline-none transition-all duration-200 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400;
 }
 
 .input-field:focus {
-  @apply ring-2 ring-primary-500 border-transparent dark:bg-gray-700 dark:text-white;
+  @apply ring-2 ring-primary-500 border-transparent;
 }
 
 .card {
   @apply bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 transition-all duration-300;
 }
 
+.card:hover {
+  @apply shadow-xl;
+}
+
 .textarea-field {
-  @apply w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg outline-none resize-none transition-all duration-200;
+  @apply w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg outline-none resize-none transition-all duration-200 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400;
 }
 
 .textarea-field:focus {
-  @apply ring-2 ring-primary-500 border-transparent dark:bg-gray-700 dark:text-white;
+  @apply ring-2 ring-primary-500 border-transparent;
 }
 
 .select-field {
-  @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg outline-none appearance-none cursor-pointer transition-all duration-200;
+  @apply w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg outline-none appearance-none cursor-pointer transition-all duration-200 bg-white dark:bg-gray-700 text-gray-900 dark:text-white;
 }
 
 .select-field:focus {
-  @apply ring-2 ring-primary-500 border-transparent dark:bg-gray-700 dark:text-white;
+  @apply ring-2 ring-primary-500 border-transparent;
 }
 
 .select-field:disabled {
@@ -100,6 +137,11 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   @apply bg-gray-500 dark:bg-gray-500;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
 }
 
 /* Animations */

@@ -2,7 +2,7 @@
  * Global application context for state management
  * Manages theme, translation state, history, and app-wide settings
  */
-import { createContext, useContext, useState, useEffect } from 'react';
+import { createContext, useContext, useState, useEffect, useLayoutEffect } from 'react';
 import { getHistory } from '../utils/db';
 import { initializeSpeechSynthesis } from '../services/speechService';
 
@@ -20,7 +20,13 @@ export const AppProvider = ({ children }) => {
   // Theme management
   const [theme, setTheme] = useState(() => {
     const saved = localStorage.getItem('theme');
-    return saved || 'light';
+    if (saved) return saved;
+    
+    // Check OS preference
+    if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+      return 'dark';
+    }
+    return 'light';
   });
 
   // Translation state
@@ -42,12 +48,27 @@ export const AppProvider = ({ children }) => {
   // Speech synthesis voices
   const [voices, setVoices] = useState([]);
 
-  // Initialize theme
-  useEffect(() => {
+  // Initialize theme on mount and whenever it changes
+  useLayoutEffect(() => {
     const root = window.document.documentElement;
-    root.classList.remove('light', 'dark');
-    root.classList.add(theme);
+    // Remove dark class for light mode
+    if (theme === 'light') {
+      root.classList.remove('dark');
+    } else {
+      root.classList.add('dark');
+    }
+    // Set data attribute for reference
+    root.setAttribute('data-theme', theme);
+    // Update color-scheme meta tag
+    const meta = document.querySelector('meta[name="color-scheme"]');
+    if (meta) {
+      meta.setAttribute('content', theme === 'dark' ? 'dark light' : 'light dark');
+    }
+    // Persist to localStorage
     localStorage.setItem('theme', theme);
+    
+    // Debug log
+    console.log('🎨 Theme applied:', theme, 'HTML classes:', root.className);
   }, [theme]);
 
   // Toggle theme
