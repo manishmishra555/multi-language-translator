@@ -44,11 +44,6 @@ A powerful, production-ready **offline-capable multi-language translator** built
 - **Copy to Clipboard** - One-click copy functionality
 - **Download Translations** - Export as .txt files
 
-## 🚀 Live Demo
-
-The application is currently running at:
-**[https://3000-i54jvrs2g5876jgjq78vw-de59bda9.sandbox.novita.ai](https://3000-i54jvrs2g5876jgjq78vw-de59bda9.sandbox.novita.ai)**
-
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
@@ -94,7 +89,7 @@ webapp/
 ├── src/
 │   ├── components/               # React components
 │   │   ├── ErrorBoundary.jsx    # Error handling
-│   │   ├── Header.jsx           # App header with theme toggle
+│   │   ├── Header.jsx           # App header 
 │   │   ├── History.jsx          # Translation history panel
 │   │   ├── LanguageSelector.jsx # Language dropdown
 │   │   ├── TextInput.jsx        # Source text input
@@ -178,9 +173,6 @@ The app uses multiple translation backends:
 - **Copy**: Click copy icon to copy translation to clipboard
 - **Download**: Click download icon to save as .txt file
 
-### Theme Toggle
-- Click moon/sun icon in header to switch between dark and light themes
-- Preference is saved in local storage
 
 ## 🌐 Offline Mode
 
@@ -335,9 +327,6 @@ Contributions are welcome! Please follow these steps:
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
 
-## 📝 License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 
 ## 🙏 Acknowledgments
 
@@ -372,4 +361,4 @@ For issues, questions, or suggestions:
 
 **Built with ❤️ using React, Vite, and Tailwind CSS**
 
-*Last Updated: December 2024*
+*Last Updated: December 2025*
